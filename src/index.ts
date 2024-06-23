@@ -26,7 +26,7 @@ server.listen(PORT,()=>{
 })
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/";
+const MONGO_URL = "mongodb://127.0.0.1:27017/workspace";
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on('error', (error: Error) => console.log(error));
@@ -35,4 +35,8 @@ app.use('/',router())
 
 app.use('*',() => {
     console.log("page not found !!")
+})
+
+process.on("uncaughtException", (e) => {
+    console.log("Error Occurred: ",e);
 })
